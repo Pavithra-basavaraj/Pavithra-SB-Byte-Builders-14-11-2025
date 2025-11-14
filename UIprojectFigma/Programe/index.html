@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dark Green Collapsible Sidebar</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        height: 100vh;
+        background: #0b3d2e;
+        color: white;
+        width: 80px;  /* Collapsed */
+        transition: 0.3s ease;
+        overflow: hidden;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        padding-top: 15px;
+    }
+
+    .sidebar.expanded {
+        width: 270px; /* Expanded */
+    }
+
+    /* LOGO + TOGGLE */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 15px;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    .logo img {
+        width: 30px;
+        filter: invert(100%);
+        transition: 0.3s;
+    }
+
+    .logo span {
+        font-size: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .sidebar.expanded .logo span {
+        opacity: 1;
+    }
+
+    /* SEARCH */
+    .search-box {
+        padding: 0 15px;
+        margin-top: 10px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .sidebar.expanded .search-box {
+        opacity: 1;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+        background: #145c44;
+        color: white;
+    }
+
+    /* TITLES */
+    .menu-title {
+        margin-top: 20px;
+        margin-left: 15px;
+        font-size: 14px;
+        opacity: 0;
+        transition: 0.3s;
+        color: #8cd9b1;
+    }
+    .sidebar.expanded .menu-title {
+        opacity: 1;
+    }
+
+    /* MENU ITEMS */
+    .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .menu-item:hover {
+        background: #145c44;
+    }
+
+    .menu-icon {
+        width: 22px;
+        filter: invert(100%);
+    }
+
+    .menu-text {
+        white-space: nowrap;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .sidebar.expanded .menu-text {
+        opacity: 1;
+    }
+
+    .badge {
+        margin-left: auto;
+        background: #0f8f60;
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-size: 12px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .sidebar.expanded .badge {
+        opacity: 1;
+    }
+
+    .theme-btn {
+        background: #0f8f60;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .sidebar.expanded .theme-btn {
+        opacity: 1;
+    }
+
+    .bottom-section {
+        margin-top: auto;
+        padding-bottom: 15px;
+    }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+    <!-- LOGO WITH TOGGLE -->
+    <div class="logo" onclick="toggleSidebar()">
+        <img id="menuIcon"
+             src="https://cdn-icons-png.flaticon.com/512/56/56763.png">
+        <span>CMS Dashboard</span>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <!-- MENU -->
+    <div class="menu-title">MENU</div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/25/25694.png">
+        <span class="menu-text">Dashboard</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+        <span class="menu-text">Posts</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/992/992651.png">
+        <span class="menu-text">Add New</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png">
+        <span class="menu-text">Drafts</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png">
+        <span class="menu-text">Categories</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/709/709790.png">
+        <span class="menu-text">Tags</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
+        <span class="menu-text">Media</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png">
+        <span class="menu-text">Comments</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+        <span class="menu-text">Users</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828984.png">
+        <span class="menu-text">Analytics</span>
+    </div>
+
+    <!-- INBOUND -->
+    <div class="menu-title">INBOUND</div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png">
+        <span class="menu-text">New</span>
+        <span class="badge">12</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/159/159604.png">
+        <span class="menu-text">In Progress</span>
+        <span class="badge">32</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/992/992700.png">
+        <span class="menu-text">Achieved</span>
+        <span class="badge">300</span>
+    </div>
+
+    <!-- OUTBOUND -->
+    <div class="menu-title">OUTBOUND</div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png">
+        <span class="menu-text">New</span>
+        <span class="badge">12</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/159/159604.png">
+        <span class="menu-text">In Progress</span>
+        <span class="badge">32</span>
+    </div>
+
+    <div class="menu-item">
+        <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/992/992700.png">
+        <span class="menu-text">Achieved</span>
+        <span class="badge">300</span>
+    </div>
+
+    <!-- THEME SETTINGS -->
+    <div class="theme-btn">🎨 Theme Settings</div>
+
+    <!-- BOTTOM -->
+    <div class="bottom-section">
+        <div class="menu-item">
+            <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png">
+            <span class="menu-text">Settings</span>
+        </div>
+
+        <div class="menu-item">
+            <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/471/471664.png">
+            <span class="menu-text">Info</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- JS TOGGLE FUNCTION -->
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const icon = document.getElementById("menuIcon");
+
+        sidebar.classList.toggle("expanded");
+
+        if (sidebar.classList.contains("expanded")) {
+            icon.src = "https://cdn-icons-png.flaticon.com/512/463/463292.png"; // X icon
+        } else {
+            icon.src = "https://cdn-icons-png.flaticon.com/512/56/56763.png"; // Hamburger
+        }
+    }
+</script>
+
+</body>
+</html>
